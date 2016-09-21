@@ -1,13 +1,26 @@
 <h1>$book.getName()</h1>
-<h2>Completed?:  $book.isCompleted()</h2>
-<h2> Belongs to: $genre.getName() list.</h2>
+
+<h2> Belongs to: $genre.getName() genre.</h2>
 
 <h2>Edit book:</h2>
 
+<ul>
+  #foreach ($review in $reviews)
+    <li>$review.getInfo()</li>
+    <li>$review.getStars()</li>
+  #end
+</ul>
+
 <form action="/genres/$book.getGenreId()/books/$book.getId()" method="post">
-  <label for="name">Description</label>
+  <input type="radio" name="rating" value="1">One Star<br>
+  <input type="radio" name="rating" value="2">Two Stars<br>
+  <input type="radio" name="rating" value="3"> Three Stars<br>
+  <input type="radio" name="rating" value="4"> Four Stars<br>
+  <input type="radio" name="rating" value="5">Five Stars<br>
+
+  <label for="name">Review</label>
   <input id="name" name="name" type="text">
-  <button type="submit" class="btn btn-info">Update Book</button>
+  <button type="submit" class="btn btn-info">Leave Review</button>
 </form>
 
 <form action="/genres/$book.getGenreId()/books/$book.getId()/delete" method="post">

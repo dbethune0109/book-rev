@@ -15,6 +15,7 @@ public class Genre {
   public String getName(){
     return name;
   }
+
   public static List<Genre> all(){
     String sql = "SELECT id, name FROM genres";
     try(Connection con = DB.sql2o.open()){

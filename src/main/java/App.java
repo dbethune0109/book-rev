@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
@@ -93,7 +94,9 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Genre genre = Genre.find(Integer.parseInt(request.params(":genre_Id")));
       Book book = Book.find(Integer.parseInt(request.params(":id")));
+      List<Review> reviews = book.getReviews();
       model.put("genre", genre);
+      model.put("reviews", reviews);
       model.put("book", book);
       model.put("template", "templates/book.vtl");
       return new ModelAndView(model, layout);
@@ -103,9 +106,12 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Book book = Book.find(Integer.parseInt(request.params("id")));
       String name = request.queryParams("name");
+      String stars1 = request.queryParams("rating");
+      int stars = Integer.parseInt(stars1);
       Genre genre = Genre.find(book.getGenreId());
-      book.update(name);
       String url = String.format("/genres/%d/books/%d", genre.getId(), book.getId());
+      Review review = new Review(name, stars , book.getId());
+      review.save();
       response.redirect(url);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
