@@ -2,7 +2,30 @@
 
 <h2> Belongs to: $genre.getName() genre.</h2>
 
-<h2>Edit book:</h2>
+#if($reviews.size() > 0)
+  <h2>Average rating:$book.getAverage()</h2>
+  #if($book.getAverage()> 4.5)
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+  #elseif($book.getAverage()> 3.5)
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+  #elseif($book.getAverage()> 2.5)
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+  #elseif($book.getAverage()> 1.5)
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+  #elseif($book.getAverage()> 0.5)
+    <img src="/images/goldenStar.png" alt="a golden star" height="30px" width="30px">
+  #end
+#end
 
 <ul>
   #foreach ($review in $reviews)

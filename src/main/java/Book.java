@@ -9,6 +9,7 @@ public class Book {
   private LocalDateTime createdAt;
   private int id;
   private int genreId;
+  private List<Review> reviews;
 
   public Book(String name, int genreId) {
     this.name = name;
@@ -97,6 +98,18 @@ public class Book {
        .addParameter("id", this.id)
        .executeAndFetch(Review.class);
    }
+ }
+
+ public double getAverage(){
+   double sum = 0.0;
+   List<Review> total = this.getReviews();
+   for(int i = 0; i < total.size(); i ++)
+   {
+     sum += total.get(i).getStars();
+   }
+
+   double roundOff = Math.round(sum/total.size() * 100.0)/ 100.0;
+   return (roundOff);
  }
 
   public int getGenreId() {
