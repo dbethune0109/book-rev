@@ -1,0 +1,10 @@
+<h1>$genre.getName() books:</h1>
+
+<ul>
+  #foreach($book in $genre.getBooks())
+   <li><a href="/genres/$genre.getId()/books/$book.getId()">$book.getName()</a></li>
+  #end
+</ul>
+
+<a href="/genres/$genre.getId()/books/new">Add a new book</a>
+<a href="/genres">All genres</a>

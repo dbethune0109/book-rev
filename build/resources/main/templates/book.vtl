@@ -1,0 +1,17 @@
+<h1>$book.getName()</h1>
+<h2>Completed?:  $book.isCompleted()</h2>
+<h2> Belongs to: $genre.getName() list.</h2>
+
+<h2>Edit book:</h2>
+
+<form action="/genres/$book.getGenreId()/books/$book.getId()" method="post">
+  <label for="name">Description</label>
+  <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-info">Update Book</button>
+</form>
+
+<form action="/genres/$book.getGenreId()/books/$book.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger" id="delete-book">Delete Book</button>
+</form>
+
+<a href="/genres/$genre.getId()">Return to $genre.getName()</a>

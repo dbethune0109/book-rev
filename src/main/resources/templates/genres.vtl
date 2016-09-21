@@ -1,0 +1,8 @@
+<h1>All genres</h1>
+<ul>
+  #foreach ($genre in $genres)
+    <li><a href="/genres/$genre.getId()">$genre.getName()</a></li>
+  #end
+</ul>
+<a href="/genres/new">Add New Genre</a>
+<a href="/">go home</a>
