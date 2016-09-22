@@ -1,4 +1,5 @@
 <h1>$book.getName()</h1>
+<h2>by: $book.getAuthor()</h2>
 
 <h2> Belongs to: $genre.getName() genre.</h2>
 
@@ -29,8 +30,7 @@
 
 <ul>
   #foreach ($review in $reviews)
-    <li>$review.getInfo()</li>
-    <li>$review.getStars()</li>
+    <li>$review.getInfo() Rating: $review.getStars()/5</li>
   #end
 </ul>
 

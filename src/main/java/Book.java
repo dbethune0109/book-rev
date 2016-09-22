@@ -10,12 +10,14 @@ public class Book {
   private int id;
   private int genreId;
   private List<Review> reviews;
+  private String author;
 
-  public Book(String name, int genreId) {
+  public Book(String name, int genreId, String author) {
     this.name = name;
     completed = false;
     createdAt = LocalDateTime.now();
     this.genreId = genreId;
+    this.author = author;
   }
 
   public String getName() {
@@ -29,9 +31,11 @@ public class Book {
   public LocalDateTime getCreatedAt() {
    return createdAt;
  }
-
+  public String getAuthor() {
+    return author;
+  }
  public static List<Book> all() {
-    String sql = "SELECT id, name, genreid FROM books";
+    String sql = "SELECT id, name, genreid, author FROM books";
     try(Connection con = DB.sql2o.open()) {
     return con.createQuery(sql).executeAndFetch(Book.class);
   }
@@ -59,6 +63,7 @@ public class Book {
       return this.getName().equals(newBook.getName()) &&
              this.getId() == newBook.getId();
     }
+
   }
 
   public void delete() {
@@ -72,10 +77,11 @@ public class Book {
 
   public void save() {
    try(Connection con = DB.sql2o.open()) {
-     String sql = "INSERT INTO books(name, genreId) VALUES (:name, :genreId)";
+     String sql = "INSERT INTO books(name, genreId, author) VALUES (:name, :genreId, :author)";
      this.id = (int) con.createQuery(sql, true)
        .addParameter("name", this.name)
        .addParameter("genreId", this.genreId)
+        .addParameter("author", this.author)
        .executeUpdate()
        .getKey();
    }

@@ -79,10 +79,11 @@ public class App {
     post("/books", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
 
-      Genre genre = Genre.find(Integer.parseInt(request.queryParams("genreId")));
 
+      Genre genre = Genre.find(Integer.parseInt(request.queryParams("genreId")));
+      String author = request.queryParams("author");
       String name = request.queryParams("name");
-      Book newBook = new Book(name, genre.getId());
+      Book newBook = new Book(name, genre.getId(), author);
       newBook.save();
 
       model.put("genre", genre);
@@ -95,7 +96,7 @@ public class App {
 
       String name = request.queryParams("search");
 
-      Book newbook = new Book("test", 5);
+      Book newbook = new Book("test", 5, "bob");
       newbook = newbook.findBook(name);
       Genre genre = Genre.find(newbook.getGenreId());
       model.put("book", newbook);
