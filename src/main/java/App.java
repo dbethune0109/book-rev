@@ -90,6 +90,20 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/results", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+
+      String name = request.queryParams("search");
+
+      Book newbook = new Book("test", 5);
+      newbook = newbook.findBook(name);
+      Genre genre = Genre.find(newbook.getGenreId());
+      model.put("book", newbook);
+      model.put("genre", genre);
+      model.put("template", "templates/results.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     get("/genres/:genre_Id/books/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Genre genre = Genre.find(Integer.parseInt(request.params(":genre_Id")));

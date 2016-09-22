@@ -1,8 +1,8 @@
 <h1>$genre.getName() books:</h1>
 
 <ul>
-  #foreach($book in $genre.getBooks())
-   <li><a href="/genres/$genre.getId()/books/$book.getId()">$book.getName()</a></li>
+  #foreach($book in $genre.sortBooks($genre.getBooks()))
+   <li><a href="/genres/$genre.getId()/books/$book.getId()">$book.getName()</a> $book.getAverage()/5</li>
   #end
 </ul>
 

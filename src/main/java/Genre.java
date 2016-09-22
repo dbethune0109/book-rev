@@ -65,4 +65,24 @@ public class Genre {
    }
  }
 
+ public List<Book> sortBooks(List<Book> total) {
+  List<Book> result = new ArrayList<Book>();
+  int current = 0;
+  for(int i = 0; i < total.size(); i ++)
+  {
+    current = i;
+    for(int j = 0; j < total.size(); j ++)
+    {
+      if(total.get(current).getAverage() < total.get(j).getAverage())
+      {
+        current = j;
+      }
+    }
+    result.add(total.get(current));
+    total.remove(current);
+    i -= 1;
+  }
+  return result;
+}
+
 }

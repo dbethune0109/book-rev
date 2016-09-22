@@ -100,13 +100,23 @@ public class Book {
    }
  }
 
+ public static Book findBook(String str) {
+   try(Connection con = DB.sql2o.open()) {
+     str = "%" + str + "%";
+     String sql = "Select * FROM books WHERE name LIKE :str";
+     Book book = con.createQuery(sql)
+     .addParameter("str",str).executeAndFetchFirst(Book.class);
+   return book;
+   }
+ }
+
  public double getAverage(){
    double sum = 0.0;
    List<Review> total = this.getReviews();
-   for(int i = 0; i < total.size(); i ++)
-   {
-     sum += total.get(i).getStars();
-   }
+     for(int i = 0; i < total.size(); i ++)
+     {
+       sum += total.get(i).getStars();
+     }
 
    double roundOff = Math.round(sum/total.size() * 100.0)/ 100.0;
    return (roundOff);
