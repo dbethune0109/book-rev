@@ -100,6 +100,7 @@ public class Book {
    }
  }
 
+
  public static Book findBook(String str) {
    try(Connection con = DB.sql2o.open()) {
      str = "%" + str + "%";

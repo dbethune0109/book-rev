@@ -3,7 +3,9 @@
 #if ($books)
   <ul>
     #foreach ($book in $books)
+
       <li><a href="/books/$book.getId()">$book.getName()</a> $book.getAverage()/5</li>
+
     #end
   </ul>
 #else
